@@ -128,6 +128,8 @@ class Pickler(object):
         else:
             flatten_func = self._get_flattener(obj)
 
+        if not flatten_func:
+            flatten_func = repr
         return self._pop(flatten_func(obj))
 
     def _get_flattener(self, obj):

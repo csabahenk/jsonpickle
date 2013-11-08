@@ -147,7 +147,11 @@ def is_sequence_subclass(obj):
     >>> is_sequence_subclass(Temp())
     True
     """
-    return ((issubclass(obj.__class__, SEQUENCES) or
+    try:
+        issq = issubclass(obj.__class__, SEQUENCES)
+    except AttributeError:
+        return False
+    return ((issq or
                 is_list_like(obj)) and
             not is_sequence(obj))
 
